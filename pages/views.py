@@ -1,5 +1,5 @@
 from django.http import HttpResponse, HttpRequest, JsonResponse
-
+from django.shortcuts import redirect
 
 def index_view(request: HttpRequest) -> HttpResponse:
     content = '''
@@ -76,6 +76,9 @@ def index_view(request: HttpRequest) -> HttpResponse:
 '''
     return HttpResponse(content=content)
 
+def root_view(request: HttpRequest) -> HttpResponse:
+    from django.shortcuts import redirect
+    return redirect('/index/')
 
 def home_view(request: HttpRequest) -> HttpResponse:
     params = request.GET
@@ -89,6 +92,24 @@ def home_view(request: HttpRequest) -> HttpResponse:
 
 def about_view(request: HttpRequest) -> HttpResponse:
     return HttpResponse('<h1>About</h1>')
+
+def projects_view(request: HttpRequest) -> HttpResponse:
+    html = """
+    <h1>Projects</h1>
+    <ul>
+        <li>Portfolio Website</li>
+        <li>FastAPI Book API</li>
+        <li>Todo App</li>
+    </ul>
+    """
+    return HttpResponse(html)
+
+def contact_view(request: HttpRequest) -> HttpResponse:
+    html = """
+    <h1>Contact</h1>
+    <p>You can reach me at: <a href='mailto:sevaralatipova2307@gmail.com'>sevaralatipova2307@gmail.com</a></p>
+    """
+    return HttpResponse(html)
 
 def greeting_view(
         request: HttpRequest,
